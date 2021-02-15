@@ -1,0 +1,49 @@
+.index-m-form {
+  //margin-bottom: 20px;
+  //margin-top: 20px;
+  .index-m-flex {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    border: 1px solid #DCDFE6;
+    border-radius: 3px;
+    padding: 18px 8px 0 18px;
+    margin-bottom: 15px;
+    .index-type2-label {
+      width: 60px;
+      display: inline-block;
+    }
+
+    .index-m-edit {
+      display: flex;
+      align-items: center;
+
+      .index-m-editbtn {
+        padding-left: 15px;
+        border-left: 1px solid #DCDFE6;
+      }
+    }
+
+    .index-m-editbtn {
+      padding-left: 15px;
+      border-left: 1px solid #DCDFE6
+    }
+  }
+}
+
+.index-m-chose {
+  border: 1px solid #DCDFE6;
+  border-radius: 3px;
+  margin-bottom: 20px;
+
+  .index-m-row {
+    padding: 10px;
+
+    .index-m-tag {
+      display: flex;
+      flex-flow: row;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+  }
+}
