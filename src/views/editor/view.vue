@@ -22,7 +22,6 @@ export default {
     }
   },
   async mounted() {
-    // debugger
     const self = this
     const id = this.$route.query.id
     const eventId = this.$route.query.id
@@ -45,7 +44,6 @@ export default {
       await self.getProjectData(id)
     } else {
       this.projectData = JSON.parse(localStorage.getItem('projectData'))
-      // debugger
       console.log()
       this.ele = this.projectData.pages[0].elements
     }

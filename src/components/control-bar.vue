@@ -275,7 +275,6 @@ export default {
       }
     },
     handleElementUUIDChange() {
-      // debugger
       if (this.activeElement && !this.activeElement.isBackground) {
         this.activeElementUUID = this.activeElementUUIDNum
       } else {
@@ -392,7 +391,6 @@ export default {
     //   const localHref = window.location.href
     //   const startInx = localHref.indexOf('#/')
     //   const { href } = this.$router.resolve({ name: 'View' })
-    //   // debugger
     //   this.publishVal = localHref.substring(0, (startInx)) + `${href}?id=${this.id}`
     // },
     quit() {

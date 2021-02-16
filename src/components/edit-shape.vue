@@ -181,7 +181,6 @@ export default {
     handleMouseDownOnPoint(point) {
       const downEvent = event
       // 抛出事件让父组件设置当前元素选中状态
-      // debugger
       console.log('handleMouseDownOnPoint', point)
       this.$emit('handleElementClick')
       if (!this.eData.isBackground) {
@@ -238,7 +237,6 @@ export default {
   .components-edit-shape {
     position: absolute;
     box-sizing: border-box;
-    z-index: 999999999999999999999999 !important;
     cursor: move;
     /*cursor: pointer;*/
     &.active {

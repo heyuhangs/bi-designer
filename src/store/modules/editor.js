@@ -337,7 +337,6 @@ const mutations = {
    * @param elData
    */
   addElement(state, elData) {
-    // debugger
     const index = state.projectData.pages.findIndex(v => {
       return v.uuid === state.activePageUUID
     })

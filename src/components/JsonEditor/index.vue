@@ -40,7 +40,6 @@ export default {
     value(value) {
       const editorValue = this.jsonEditor.getValue()
       if (value !== editorValue) {
-        // debugger
         if (typeof value === 'object') {
           this.jsonEditor.setValue(JSON.stringify(this.value, null, 2))
         } else {

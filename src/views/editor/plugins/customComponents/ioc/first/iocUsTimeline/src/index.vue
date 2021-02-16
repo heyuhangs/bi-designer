@@ -67,14 +67,12 @@ export default {
       // if (val == '2'){
       //   this.getData()
       // }
-      // debugger
       if (val === '3') {
         this.getData()
       }
     }
   },
   mounted() {
-    // debugger
     if (this.dataType === '3') {
       this.getData()
     }

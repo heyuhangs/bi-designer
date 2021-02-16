@@ -51,7 +51,6 @@ export default {
   },
   // $watch: {
   //   elementList(val) {
-  //     debugger
   //   }
   // },
   mounted() {

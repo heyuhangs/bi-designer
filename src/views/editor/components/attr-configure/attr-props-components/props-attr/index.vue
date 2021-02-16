@@ -18,9 +18,6 @@ export default {
   components: {
     ...attrComponents
   },
-  // mounted() {
-  // debugger
-  // },
   computed: {
     ...mapState({
       projectData: state => state.editor.projectData,
