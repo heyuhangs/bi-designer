@@ -124,8 +124,8 @@
         <p class="attr-item-title">数据类型：</p>
         <el-radio-group v-model="radio" size="mini" @change="radioChange">
           <el-radio-button :label="'1'">静态数据</el-radio-button>
-          <el-radio-button :label="'2'">指标数据</el-radio-button>
-          <el-radio-button :label="'3'">API数据</el-radio-button>
+<!--          <el-radio-button :label="'2'">指标数据</el-radio-button>-->
+<!--          <el-radio-button :label="'3'">API数据</el-radio-button>-->
         </el-radio-group>
       </div>
       <el-tooltip content="刷新数据" placement="top-end" effect="dark">

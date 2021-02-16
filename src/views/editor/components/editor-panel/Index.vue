@@ -44,13 +44,15 @@
               @resize="handleElementResize"
             >
               <!--组件编辑区域 外部遮层-->
-              <div style="position: relative; width: 100%;height: 100%; z-index: 9999999999999999999999999999;">
-                <component
-                  :is="item.elName"
-                  class="element-on-edit-pane"
-                  v-bind="{...item.propsValue, value: item.value}"
-                />
-              </div>
+              <div
+                class="edit-shape-component"
+                style="position: absolute; width: 100%;height: 100%; z-index: 999;"
+              />
+              <component
+                :is="item.elName"
+                class="element-on-edit-pane"
+                v-bind="{...item.propsValue, value: item.value}"
+              />
             </edit-shape>
           </div>
           <div class="page-wrapper-mask"/>
@@ -67,9 +69,6 @@
         <el-col :span="8">
           <div class="page-center">
             <i class="el-icon-c-scale-to-original"/>尺寸：<span>{{ projectData.width }} , {{ projectData.height }}</span>
-            <!--<span> | {{ editorPaneInnerWidth }},{{ editorPaneInnerHeight }}</span>
-            <span> | {{ parseInt(projectData.width * scale) }},{{ parseInt(projectData.height * scale) }}</span>
-            <span> | {{ translateX }},{{ translateY }}</span>-->
           </div>
         </el-col>
         <el-col :span="8">
@@ -193,26 +192,22 @@ export default {
   },
   created() {
     this.scaleValue = parseInt((this.scale * 100).toFixed(0))
-    // this.projectData = this.projectData
-    // projectData
-    // this.projectData.canvasScale = this.scale
   },
   mounted() {
-    console.log('this.scale', this.scale)
     if (this.scale === 0.2) {
       this.updateSize(this.updateSizeEL())
     }
     console.log('activePage.elements', this.activePage)
-    // debugger
     window.onresize = () => {
       return (() => {
-        // window.screenWidth = document.body.clientWidth
-        // this.screenWidth = window.screenWidth
         this.updateSize(this.scale)
       })()
     }
   },
   methods: {
+    // refresh() {
+    //   return false
+    // },
     handleDrop(e) {
       e.preventDefault()
       e.stopPropagation()
@@ -329,10 +324,7 @@ export default {
       this.$store.dispatch('setActiveElementUUID', uuid)
     },
     handleBgElementClick(e) {
-      // console.log('123123')
       this.$store.dispatch('setActiveElementUUID', this.projectData.bgMapObj.uuid)
-      // e.stopPropagation()
-      // e.preventDefault()
     },
     /**
      * 移动改变元素大小定位
@@ -355,7 +347,6 @@ export default {
       this.eY = pos.top
     },
     handleClickCanvas(e) {
-      // debugger
       if (!e.target.classList.contains('element-on-edit-pane') && !e.target.classList.contains('menu-item-on-edit-panel')) {
         console.log('handleClickCanvas----123--123')
         this.$store.dispatch('setActiveElementUUID', '')
@@ -404,21 +395,7 @@ export default {
           duration: 2500
         })
       }
-    },
-    /**
-     * 提供截屏作为项目主图
-     */
-    // screenshots() {
-    //
-    //   html2canvas(el, {
-    //     width: 375,
-    //     height: 667,
-    //     proxy: '/htmltocanvas/corsproxy' // 设置跨域接口
-    //   }).then(canvas => {
-    //     const url = canvas.toDataURL('image/jpeg')
-    //     this.$store.commit('updateCoverImage', url)
-    //   })
-    // }
+    }
   }
 }
 </script>
@@ -488,6 +465,8 @@ export default {
 }
 
 .element-on-edit-pane {
+  position: absolute;
+  z-index: -99;
   height: 100%;
   width: 100%;
   overflow: hidden;
