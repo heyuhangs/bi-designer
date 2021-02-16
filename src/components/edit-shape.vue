@@ -1,19 +1,16 @@
-/**
-组件编辑外层拖拽，可编辑按钮，缩放改变盒子大小
-*/
 <template>
   <div
     class="components-edit-shape"
     :class="{active: active}"
-    @click="handleTopWrapperClick"
-    @mousedown="handleMouseDownOnElement"
+    @click.stop="handleTopWrapperClick"
+    @mousedown.stop="handleMouseDownOnElement"
   >
     <div
       v-for="item in (active ? pointList : [])"
       :key="item"
       class="edit-shape-point"
       :style="getPointStyle(item)"
-      @mousedown="handleMouseDownOnPoint(item)"
+      @mousedown.stop="handleMouseDownOnPoint(item)"
     />
     <slot />
   </div>
@@ -239,9 +236,9 @@ export default {
   }
 
   .components-edit-shape {
-    position: relative;
+    position: absolute;
     box-sizing: border-box;
-    z-index: 99999999;
+    z-index: 999999999999999999999999 !important;
     cursor: move;
     /*cursor: pointer;*/
     &.active {

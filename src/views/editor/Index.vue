@@ -14,19 +14,6 @@
     </div>
     <!--页面编辑区域-->
     <div class="editor-main">
-      <!--      <div class="control-bar-wrapper">-->
-      <!--        <controlBar-->
-      <!--          :id="id"-->
-      <!--          :scale.sync="projectData.canvasScale"-->
-      <!--          @import-psd-data="importPsdData"-->
-      <!--          @showPreview="showPreviewFn"-->
-      <!--          @savePreview="savePreview"-->
-      <!--          @cancel="cancelFn"-->
-      <!--          @publish="publishFn"-->
-      <!--          @save="saveFn"-->
-      <!--          @importSuccess="importSuccessFn"-->
-      <!--        />-->
-      <!--      </div>-->
       <!--内容编辑区域-->
       <editorPan ref="editorPan" :scale.sync="projectData.canvasScale"/>
     </div>

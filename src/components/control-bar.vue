@@ -138,9 +138,9 @@
       <el-tooltip class="item" effect="dark" content="保存" placement="bottom">
         <el-button
           class="menuber-item"
-          :class="{disabled: !activePage.elements.length}"
           @click="save"
         >
+          <!--          :class="{disabled: !activePage.elements.length}"-->
           <i class="iconfont iconbaocun"/>
           <p>保存</p>
         </el-button>

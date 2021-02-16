@@ -540,7 +540,7 @@ const getters = {
   activePage() {
     // 如果不存在页面返回-1
     if (!state.projectData.pages || !state.activePageUUID) {
-      return { commonStyle: {}, config: {}}
+      return { commonStyle: {}, config: {} }
     }
     return state.projectData.pages.find(v => {
       return v.uuid === state.activePageUUID
@@ -552,13 +552,13 @@ const getters = {
   activeElement() {
     // 如果不存在页面返回-1
     if (!state.projectData.pages) {
-      return { commonStyle: {}, propsValue: {}}
+      return { commonStyle: {}, propsValue: {} }
     }
     const currentPageIndex = state.projectData.pages.findIndex(v => {
       return v.uuid === state.activePageUUID
     })
     if (currentPageIndex === -1) {
-      return { commonStyle: {}, propsValue: {}}
+      return { commonStyle: {}, propsValue: {} }
     }
     // debugger
     // 选择背景
@@ -569,6 +569,12 @@ const getters = {
     return state.projectData.pages[currentPageIndex].elements.find(v => {
       return v.uuid === state.activeElementUUID
     })
+  },
+  /**
+   * 所有el元素
+   */
+  elementList(state) {
+    return state.projectData.pages[0].elements
   },
   canUndo(state) {
     return state.currentHistoryIndex > 0

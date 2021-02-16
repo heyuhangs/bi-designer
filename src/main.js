@@ -21,6 +21,7 @@ Vue.use(VueAMap)
 VueAMap.initAMapApiLoader({
   // 高德的key
   key: 'e7152df832f53aad42466f79b0630139',
+  // key: 'ba7c074057365d2ce1dcf3d6be2d9281',
   viewMode: '3D',
   // 插件集合
   plugin: ['AMap.ControlBar', 'AMap.Weather', 'AMap.Geolocation', 'AMap.GltfLoader', 'AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.PolyEditor,AMap.CircleEditor,AMap.MouseTool'],

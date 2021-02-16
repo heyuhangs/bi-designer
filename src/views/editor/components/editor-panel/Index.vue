@@ -44,7 +44,7 @@
               @resize="handleElementResize"
             >
               <!--组件编辑区域 外部遮层-->
-              <div style="position: relative; width: 100%;height: 100%; z-index: 9999999;">
+              <div style="position: relative; width: 100%;height: 100%; z-index: 9999999999999999999999999999;">
                 <component
                   :is="item.elName"
                   class="element-on-edit-pane"
@@ -53,24 +53,6 @@
               </div>
             </edit-shape>
           </div>
-          <!--  组件快捷操作菜单 -已经移动到上方功能栏  -->
-          <!--          <div-->
-          <!--            class="page-wrapper-menu-operation menu-item-on-edit-panel"-->
-          <!--            :style="{transform: 'scale('+(1/scale)+')'}"-->
-          <!--            :class="{active: activeElementUUID}"-->
-          <!--          >-->
-          <!--            <el-tooltip-->
-          <!--              v-for="(item, index) in menuOptions"-->
-          <!--              :key="index"-->
-          <!--              effect="dark"-->
-          <!--              :content="item.title"-->
-          <!--              placement="right"-->
-          <!--            >-->
-          <!--              <div class="menu-item menu-item-on-edit-panel" @click="handleElementCommand(item.value)">-->
-          <!--                <i class="menu-item-on-edit-panel" :class="[item.icon]" />-->
-          <!--              </div>-->
-          <!--            </el-tooltip>-->
-          <!--          </div>-->
           <div class="page-wrapper-mask"/>
         </div>
       </div>

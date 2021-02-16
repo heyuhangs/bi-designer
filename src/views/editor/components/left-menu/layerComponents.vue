@@ -1,13 +1,7 @@
 <template>
   <div class="layer-components-main">
-    <el-tree :data="ele" :props="ele.elements">
+    <el-tree :data="elementList" :props="treeDefaultProps">
       <template slot-scope="{ node, data }">
-        <!--        <div class="el-layer-content-item" @node-click="handleNodeClick(node,data)">-->
-        <!--          <div class="con-item-icon"><i :class="[data.icon]"/></div>-->
-        <!--                  <div class="con-item-txt">-->
-        <!--                    <span>{{data.elName}}</span>-->
-        <!--                  </div>-->
-        <!--                </div>-->
         <div class="el-layer-content-item" @node-click="handleNodeClick(node,data)">
           <el-row>
             <el-col :span="5">
@@ -34,7 +28,7 @@
 // import pageManage from '../page-manage'
 // import templateLibs from '../template-libs'
 
-import { mapState } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   props: {},
@@ -45,28 +39,28 @@ export default {
         children: 'chirden',
         label: 'elName'
       }
-      // activeSideBar: 'componentLibs',
-      // sidebarMenus: [
-      //   {
-      //     label: '组件列表',
-      //     value: 'componentLibs',
-      //     elementUiIcon: 'el-icon-s-operation'
-      //   },
-      //   {
-      //     label: '模板库',
-      //     value: 'templateLibs',
-      //     elementUiIcon: 'el-icon-files'
-      //   }
-      // ]
     }
   },
   computed: {
     ...mapState({
       projectData: state => state.editor.projectData
-    })
+    }),
+    ...mapGetters([
+      'elementList'
+    ])
   },
+  // $watch: {
+  //   elementList(val) {
+  //     debugger
+  //   }
+  // },
   mounted() {
-    // this.initLayerComponents()
+    const self = this
+    // setTimeout(function() {
+    // self.elementList
+    // console.log(self.elementList)
+    // }, 5000)
+    // debugger
   },
   methods: {
     handleNodeClick(node) {
@@ -114,7 +108,8 @@ export default {
 
   .el-layer-content-item {
     width: 100%;
-    line-height: 50px;
+    line-height: 60px;
+    margin-bottom: 5px;
     /*padding: 6px 8px;*/
     color: #c0c4cc;
     font-size: 14px;
