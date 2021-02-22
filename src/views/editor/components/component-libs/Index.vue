@@ -38,9 +38,9 @@
 
 <script>
 import { camelCase } from 'lodash'
-import editorProjectConfig from '@/views/editor/DataModel'
+import editorProjectConfig from '@/views/editor/custom-component/DataModel'
 // import eleConfig from '../../'
-import { _qk_register_components_object } from '../../plugins/index'
+import { _qk_register_components_object } from '../../custom-component/plugins/index'
 
 window._qk_register_components_object = _qk_register_components_object
 console.log(_qk_register_components_object)

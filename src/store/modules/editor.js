@@ -1,5 +1,5 @@
 import { cloneDeep, merge } from 'lodash'
-import editorProjectConfig from '../../views/editor/DataModel'
+import editorProjectConfig from '../../views/editor/custom-component/DataModel'
 
 /**
  * 编辑器数据状态存储

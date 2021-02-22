@@ -1,32 +1,21 @@
 <template>
-  <div v-loading="loading" class="page-editor editor-wrapper">
+  <div class="page-editor editor-wrapper">
     <div class="left-menu-main">
-      <el-tabs>
-        <el-tab-pane>
-          <span slot="label">组件</span>
-          <component-menu/>
-        </el-tab-pane>
-        <el-tab-pane label="消息中心">
-          <span slot="label">图层</span>
-          <layer-components ref="layerComRef"/>
-        </el-tab-pane>
-      </el-tabs>
+      <ComponentsLibs/>
     </div>
     <!--页面编辑区域-->
     <div class="editor-main">
-      <!--内容编辑区域-->
-      <editorPan ref="editorPan" :scale.sync="projectData.canvasScale"/>
+      <EditorPan ref="editorPan" :scale.sync="projectData.canvasScale"/>
     </div>
     <!--属性编辑区域-->
     <div class="el-attr-edit-wrapper scrollbar-wrapper">
-      <!--      v-if="!activeElementUUID || activeElement.isBackground"-->
       <el-tabs
         v-if="!activeElementUUID"
         :value="defaultActiveAttr"
         stretch
       >
         <el-tab-pane label="大屏设置" name="大屏设置">
-          <pageAttrEdit ref="pageAttrEditRef" @screenshots="screenshots()"/>
+          <pageAttrEdit ref="pageAttrEditRef" @screenshots="screenshots"/>
         </el-tab-pane>
         <el-tab-pane label="背景地图" name="背景地图">
           <backgroundMapEdit/>
@@ -45,43 +34,18 @@
             v-if="activeAttr == item.elName"
           />
         </el-tab-pane>
-        <!--        <el-tab-pane label="数据" name="4">-->
-
-        <!--        </el-tab-pane>-->
-        <!--          <el-tab-pane v-if="item.id == 1" label="事件" name="1">-->
-        <!--            <eventEdit />-->
-        <!--          </el-tab-pane>-->
-        <!--          <el-tab-pane v-if="item.id == 2" label="动画" name="2">-->
-        <!--            <animationEdit />-->
-        <!--          </el-tab-pane>-->
-        <!--          <el-tab-pane v-if="item.id == 3" label="JS脚本" name="3">-->
-        <!--            <scriptEdit />-->
-        <!--          </el-tab-pane>-->
-        <!--        </div>-->
       </el-tabs>
     </div>
-    <!--预览-->
-    <previewPage
-      v-if="showPreview"
-      :page-data="projectData"
-      :page-id="id"
-      @closePreview="showPreview = false"
-      @publishFn="publishFn"
-      @saveFn="saveFn"
-    />
-    <!--我的图片-->
-    <imageLibs/>
+    <loading-bar v-show="loading"/>
   </div>
 </template>
 
 <script>
-// import componentLibs from './components/component-libs/Index'
-// import pageManage from './components/page-manage'
-// import templateLibs from './components/template-libs'
-import componentMenu from './components/left-menu/componentMenu'
-import layerComponents from './components/left-menu/layerComponents'
-import editorPan from './components/editor-panel/Index'
+
 // 属性编辑相关组件
+import loadingBar from '@/components/loadingBar'
+import EditorPan from './components/EditorPan'
+import ComponentsLibs from './components/ComponentsLibs'
 import attrEdit from './components/attr-configure/attr-edit'
 import dataEdit from './components/attr-configure/data-edit'
 import animationEdit from './components/attr-configure/animation-edit'
@@ -92,30 +56,22 @@ import scriptEdit from './components/attr-configure/script-edit'
 
 import previewPage from './components/preview'
 import imageLibs from '../../components/image-libs'
-import { default as Backendless } from 'backendless'
 import { mapState, mapGetters } from 'vuex'
-import html2canvas from 'html2canvas'
-// import { getJson } from './test'
-// import { Message } from 'element-ui'
 
 export default {
   components: {
-    // componentLibs,
-    // pageManage,
-    // templateLibs,
+    loadingBar,
     dataEdit,
     imageLibs,
-    editorPan,
     attrEdit,
     animationEdit,
     eventEdit,
     scriptEdit,
     pageAttrEdit,
     backgroundMapEdit,
-    // controlBar,
     previewPage,
-    componentMenu,
-    layerComponents
+    ComponentsLibs,
+    EditorPan
   },
   data() {
     return {
@@ -178,151 +134,22 @@ export default {
   async created() {
     const self = this
     await self.$store.dispatch('setPrjectData')
-    // self.projectId = self.$route.query.projectId
-    // if (self.$route.query.id) {
-    //   self.id = self.$route.query.id
-    //   self.isAdd = false
-    //   await self.initPageData()
-    // } else {
     self.isAdd = true
-    // }
-    // await self.getData()
-    // self.bigScreenList = await JSON.parse(localStorage.getItem('bigScreenList') || '[]')
-    // if (self.id) {
-    //   self.isEdit = true
-    //   self.bigScreenList.forEach((item, index) => {
-    //     if (item.id === self.id) {
-    //       self.bigScreenObj = item
-    //       self.bigScreenInx = index
-    //       return item.id === self.id
-    //     }
-    //   })
-    //   if (self.bigScreenObj) {
-    //     self.initPageData()
-    //   }
-    //   console.log('bigScreenObj', self.bigScreenObj)
-    //   console.log('id', self.id)
-    // }
   },
   mounted() {
-    this.initPageData()
+    const self = this
+    this.loading = true
+    setTimeout(function() {
+      self.loading = false
+    },1500)
   },
   methods: {
-    // async getProject() {
-    //   const queryBuilder = Backendless.DataQueryBuilder.create()
-    //   queryBuilder.setSortBy(['created desc'])
-    //   queryBuilder.setWhereClause(`objectId = '${this.projectId}'`)
-    //   queryBuilder.setRelated(['bigScreen.pages.elements.animations', 'bigScreen.pages.elements.events'])
-    //   const projectRes = await Backendless.Data.of('LSE_Project').find(queryBuilder)
-    //   this.projectObj = projectRes[0]
-    // },
-    async getPageData(id) {
-      const queryBuilder = Backendless.DataQueryBuilder.create()
-      queryBuilder.setSortBy(['created desc'])
-      queryBuilder.setWhereClause(`bigScreen.objectId = '${id}'`)
-      queryBuilder.setRelated(['bigScreen'])
-      queryBuilder.setPageSize(1000)
-      return await Backendless.Data.of('LSE_Page').find(queryBuilder)
-    },
-    async getElementData(id) {
-      const queryBuilder = Backendless.DataQueryBuilder.create()
-      queryBuilder.setSortBy(['created desc'])
-      queryBuilder.setWhereClause(`page.objectId = '${id}'`)
-      queryBuilder.setRelated(['page', 'animations', 'events'])
-      queryBuilder.setPageSize(1000)
-      return await Backendless.Data.of('LSE_Element').find(queryBuilder)
-    },
-    //
-    // const bigScreenRes = await Backendless.Data.of('LSE_Element').find(queryBuilder)
     /**
      * 初始化页面数据
      */
-    async initPageData() {
+    screenshots() {
       this.$refs.editorPan.screenshots()
     },
-    /**
-     * 保存
-     */
-    // async saveFn() {
-    //   const self = this
-    //   if (this.isClick) {
-    //     return false
-    //   } else {
-    //     this.isClick = true
-    //   }
-    //   await this.screenshots()
-    //   const bigScreenObj = JSON.parse(JSON.stringify(this.projectData))
-    //   bigScreenObj.bgMapObj = JSON.stringify(bigScreenObj.bgMapObj)
-    //   const pagesObj = bigScreenObj.pages[0]
-    //   const elementList = bigScreenObj.pages[0].elements
-    //   console.log(bigScreenObj)
-    //
-    //   // 存LSE_Project实例
-    //   const lesBigScreenRes = await Backendless.Data.of('LSE_BigScreen').save(bigScreenObj)
-    //   if (lesBigScreenRes.code) {
-    //     doError(lesBigScreenRes)
-    //   }
-    //
-    //   // 存LSE_Page实例
-    //   pagesObj.commonStyle = JSON.stringify(pagesObj.commonStyle)
-    //   pagesObj.config = JSON.stringify(pagesObj.config)
-    //   const pagesObjRes = await Backendless.Data.of('LSE_Page').save(pagesObj)
-    //   if (pagesObjRes.code) {
-    //     doError(pagesObjRes)
-    //   }
-    //   // clear ElementList
-    //   const celarElementRes = await Backendless.Data.of('LSE_Element').bulkDelete(`page.objectId = '${this.pageObj.objectId}'`)
-    //   if (celarElementRes.code) {
-    //     doError(celarElementRes)
-    //   }
-    //
-    //   // elementList
-    //   const templatePromis = []
-    //   elementList.forEach(eleItem => {
-    //     delete eleItem.objectId
-    //     eleItem.attributeTab = JSON.stringify(eleItem.attributeTab)
-    //     eleItem.attributeTabNavigation = JSON.stringify(eleItem.attributeTabNavigation)
-    //     eleItem.commonStyle = JSON.stringify(eleItem.commonStyle)
-    //     eleItem.propsValue = JSON.stringify(eleItem.propsValue)
-    //     eleItem.ownerId = pagesObjRes.objectId
-    //     templatePromis.push(Backendless.Data.of('LSE_Element').save(eleItem))
-    //   })
-    //   // 存LSE_Element实例
-    //   const elementRes = await Promise.all(templatePromis)
-    //   if (elementRes.code) {
-    //     doError(elementRes)
-    //   }
-    //
-    //   // setRelation  关系维护
-    //   const templatePromisSetRelation = []
-    //   templatePromisSetRelation.push(Backendless.Data.of('LSE_BigScreen').setRelation(lesBigScreenRes, 'project', [this.projectId]))
-    //   // templatePromisSetRelation.push(Backendless.Data.of('LSE_BigScreen').setRelation(lesBigScreenRes, 'pages', [pagesObjRes.objectId]))
-    //   templatePromisSetRelation.push(Backendless.Data.of('LSE_Page').setRelation(pagesObjRes, 'bigScreen', [lesBigScreenRes.objectId]))
-    //   elementRes.forEach(item => {
-    //     templatePromisSetRelation.push(Backendless.Data.of('LSE_Element').setRelation(item, 'page', [item.ownerId]))
-    //   })
-    //   const relationRes = await Promise.all(templatePromisSetRelation)
-    //   if (relationRes.code) {
-    //     doError(relationRes)
-    //   }
-    //   this.$message.success('保存成功!')
-    //   setTimeout(() => {
-    //     self.isClick = false
-    //     self.$router.go(-1) // 返回上一层
-    //   }, 50000)
-    // },
-    /**
-     * 发布
-     */
-    // async publishFn() {
-    //   // await this.screenshots()
-    //   // 提交数据再预览
-    //   this.$axios.post('/page/publish/' + this.id, this.projectData).then(() => {
-    //     this.$message.success('发布成功!')
-    //     this.showPreview = false
-    //     this.$router.push({ path: 'page-list', query: { previewId: this.id }})
-    //   })
-    // },
     dataURLtoFile(dataurl, filename = new Date().getTime()) {
       const arr = dataurl.split(',')
       const mime = arr[0].match(/:(.*?);/)[1]
@@ -337,34 +164,6 @@ export default {
         type: mime
       })
     }
-    /**
-     *
-     * @param dataList
-     */
-    // importPsdData(psdData) {
-    //   const elementsList = psdData.elements
-    //   const psdWidth = psdData.document.width
-    //   const scalingRatio = this.projectData.width / psdWidth
-    //   elementsList.forEach(item => {
-    //     const { width, height, top, left, imageSrc, opacity, zIndex } = item
-    //     setTimeout(() => {
-    //       this.$store.dispatch('addElement', {
-    //         elName: 'qk-image',
-    //         defaultStyle: {
-    //           width: width * scalingRatio,
-    //           height: height * scalingRatio,
-    //           top: top * scalingRatio,
-    //           left: left * scalingRatio,
-    //           zIndex: zIndex,
-    //           opacity
-    //         },
-    //         needProps: {
-    //           imageSrc: imageSrc
-    //         }
-    //       })
-    //     }, 10)
-    //   })
-    // }
   }
 }
 </script>
@@ -377,8 +176,6 @@ export default {
 .editor-wrapper {
   display: flex;
   position: relative;
-  /*background: #000000;*/
-  /*height: 100%;*/
   min-height: calc(100vh - 65px);
 
   .editor-side-bar {
@@ -386,19 +183,11 @@ export default {
     width: 55px;
   }
 
-  /*.editor-page-edit-wrapper {*/
-  /*  width: 210px;*/
-  /*  padding: 0 1px;*/
-  /*}*/
-
   .editor-main {
     flex: 1;
     width: calc(100vh - 680px);
     height: calc(100vh - 60px);
-    /*max-width: calc(100vh - 680px);*/
-    /*overflow: auto;*/
     background: #171b22 !important;
-    /*background: #f0f2f5;*/
     position: relative;
 
     .el-footer {

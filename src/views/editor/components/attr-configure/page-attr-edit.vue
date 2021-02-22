@@ -104,7 +104,7 @@
 <script>
 import { mapState, mapGetters } from 'vuex'
 import imageSelect from '../../../../components/image-select'
-import eleBgConfig from '../../el-bg-config.js'
+import eleBgConfig from '../../custom-component/el-bg-config.js'
 
 export default {
   components: {

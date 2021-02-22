@@ -41,9 +41,9 @@
 <script>
 import { camelCase } from 'lodash'
 import { mapState, mapGetters } from 'vuex'
-import eleBgConfig from '../../el-bg-config.js'
+import eleBgConfig from '../../custom-component/el-bg-config.js'
 import propsAttr from './attr-props-components/props-attr/index.vue'
-import { _qk_register_components_object } from '@/views/editor/plugins'
+import { _qk_register_components_object } from '@/views/editor/custom-component/plugins'
 
 export default {
   components: {

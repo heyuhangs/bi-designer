@@ -1,21 +1,23 @@
 <template>
   <div v-loading="loading" class="view" :style="divTrans">
-    <view-page ref="viewPage" :ele="ele" :project-data="projectData" />
+    <view-page ref="viewPage" :ele="ele" :project-data="projectData"/>
+    <loading-bar v-show="loading"/>
   </div>
 </template>
 
 <script>
-import viewPage from './components/editor-panel/viewPage'
-import { default as Backendless } from 'backendless'
-// import request from '@/utils/http'
-import Unit from '../editor/plugins/unit'
+import loadingBar from '@/components/loadingBar'
+import ViewPage from './components/ViewPage'
+import Unit from './custom-component/plugins/unit'
 
 export default {
   components: {
-    viewPage
+    ViewPage,
+    loadingBar
   },
   data() {
     return {
+      loading: false,
       divTrans: {},
       projectData: {},
       ele: []
@@ -23,6 +25,7 @@ export default {
   },
   async mounted() {
     const self = this
+    self.loadingBar = true
     const id = this.$route.query.id
     const eventId = this.$route.query.id
     const event = []
@@ -58,6 +61,9 @@ export default {
       // debugger
       this.divTrans = { overflow: 'auto' }
     }
+    setTimeout(function() {
+      self.loading = false
+    }, 1500)
   },
   methods: {
     // getEventData() {
@@ -147,21 +153,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .view {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    /*overflow: auto;*/
-    /*object-fit: contain;*/
-    /*background: rgba(0, 0, 0, .75);*/
-    transform: scale(1) translate(0px, 0px);
-    transform-origin: 0px 0px;
-  }
+.view {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /*overflow: auto;*/
+  /*object-fit: contain;*/
+  /*background: rgba(0, 0, 0, .75);*/
+  transform: scale(1) translate(0px, 0px);
+  transform-origin: 0px 0px;
+}
 
-  /*  .view-main {
-      transform: scale(0.6) !important;
-      position: absolute !important;
-      top: -105px !important;
-      left: -355px !important;
-    }*/
+/*  .view-main {
+    transform: scale(0.6) !important;
+    position: absolute !important;
+    top: -105px !important;
+    left: -355px !important;
+  }*/
 </style>

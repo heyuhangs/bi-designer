@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import eleConfig from '../../ele-config'
+import eleConfig from '../../custom-component/ele-config'
 import componentLibs from '../component-libs/Index'
 // import pageManage from '../page-manage'
 // import templateLibs from '../template-libs'
