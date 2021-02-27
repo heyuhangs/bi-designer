@@ -7,7 +7,7 @@ import Element from 'element-ui'
 import '@/common/styles/element-variables.scss'
 // 主题
 import '@/assets/style/theme/night-theme/night-index.scss'
-import '@/common/iStyle/index.scss' // global css
+// import '@/common/iStyle/index.scss' // global css
 import config from './config'
 import VueAMap from 'vue-amap'
 import App from './App'

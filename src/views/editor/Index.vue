@@ -28,7 +28,6 @@
           :label="item.name"
           :name="item.elName"
         >
-          <!--          属性-->
           <component
             :is="item.elName"
             v-if="activeAttr == item.elName"

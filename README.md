@@ -1,3 +1,4 @@
+![Licence](https://img.shields.io/badge/licence-none-green.svg)
 # bi-designer
 
 [comment]: <> (English | [简体中文]&#40;./README-zh.md&#41;)

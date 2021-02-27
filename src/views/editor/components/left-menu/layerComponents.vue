@@ -2,7 +2,7 @@
   <div class="layer-components-main">
     <el-tree :data="elementList" :props="treeDefaultProps">
       <template slot-scope="{ node, data }">
-        <div class="el-layer-content-item" @node-click="handleNodeClick(node,data)">
+        <div class="el-layer-content-item" @click="handleElementClick(data)">
           <el-row>
             <el-col :span="5">
               <div class="con-item-icon">
@@ -54,7 +54,7 @@ export default {
   //   }
   // },
   mounted() {
-    const self = this
+    // const self = this
     // setTimeout(function() {
     // self.elementList
     // console.log(self.elementList)
@@ -62,8 +62,12 @@ export default {
     // debugger
   },
   methods: {
-    handleNodeClick(node) {
-
+    /**
+     * 元素被点击
+     * @param uuid
+     */
+    handleElementClick(data) {
+      this.$store.dispatch('setActiveElementUUID', data.uuid)
     }
     // initLayerComponents() {
     // debugger

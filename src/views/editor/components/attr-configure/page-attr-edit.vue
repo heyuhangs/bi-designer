@@ -27,15 +27,6 @@
         active-color="#4072EE"
         inactive-color="#292E33"
       />
-      <!--      <el-row :gutter="20" style="width: 100%;">-->
-      <!--        <el-col :span="3">-->
-      <!--          <el-color-picker-->
-      <!--            v-model="activePage.commonStyle.backgroundColor"-->
-      <!--            size="mini"-->
-      <!--            :show-alpha="true"-->
-      <!--          />-->
-      <!--        </el-col>-->
-      <!--      </el-row>-->
     </div>
     <!--    -->
     <p class="page-title fontBold">背景</p>

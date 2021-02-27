@@ -249,11 +249,10 @@ export default {
       'editorRedo'
     ]),
     exportJSONFile() {
-      // console.log('projectData', )
       const bigScreen = JSON.stringify(this.projectData)
       const fileSaver = require('file-saver')
       const blob = new Blob([bigScreen], { type: 'text/plain; charset=utf-8' })
-      fileSaver.saveAs(blob, `/${this.projectData.id}.json`)
+      fileSaver.saveAs(blob, `/${new Date().getTime()}.json`)
     },
     handleAvatarSuccessA() {
     },
