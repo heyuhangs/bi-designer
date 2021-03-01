@@ -181,7 +181,6 @@ const getCommonStyle = function(styleObj, scalingRatio = 1) {
       style[key] = styleObj[key]
     }
   }
-  console.log('getCommonStyle~~~~~~~~~~~~~~~~~~~~~')
   style.transform = `rotate(${style.rotate}deg)`
   style.backgroundImage = style.backgroundImage ? `url(${style.backgroundImage})` : ''
   return style

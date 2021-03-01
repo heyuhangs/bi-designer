@@ -190,17 +190,31 @@ export default {
       deep: true
     }
   },
-  created() {
-    this.scaleValue = parseInt((this.scale * 100).toFixed(0))
-  },
+  // created() {
+  // },
   mounted() {
+    const self = this
+    this.scaleValue = parseInt((this.scale * 100).toFixed(0))
+    // let that = this;
+    // window.onresize = function(){
+    //   this.clientHeight =  `${document.documentElement.clientHeight}`;
+    //   if(that.$refs.page){
+    //     that.$refs.page.style.minHeight = clientHeight - 100 + 'px';
+    //   }
+    // }
+    self.clientHeight = `${document.documentElement.clientHeight}`// 获取浏览器可视区域高度
+    self.clientWidth = `${document.documentElement.clientWidth}`// 获取浏览器可视区域高度
+    console.log('clientHeight', self.clientHeight)
+    console.log('clientWidth', self.clientWidth)
     if (this.scale === 0.2) {
       this.updateSize(this.updateSizeEL())
     }
-    console.log('activePage.elements', this.activePage)
     window.onresize = () => {
+      self.clientHeight = `${document.documentElement.clientHeight}`// 获取浏览器可视区域高度
+      self.clientWidth = `${document.documentElement.clientWidth}`// 获取浏览器可视区域高度
       return (() => {
         this.updateSize(this.scale)
+        this.updateSizeEL()
       })()
     }
   },
@@ -242,10 +256,8 @@ export default {
     },
     // 计算比例的方法 小数
     updateSizeEL() {
-      // console.log(this.$refs.elMain)
-      const eWidth = this.$refs.elMain.clientWidth
-      const eHeight = this.$refs.elMain.clientHeight
-      // console.log(eWidth, eHeight)
+      const eWidth = this.clientWidth
+      const eHeight = this.clientHeight
       this.editorPaneInnerWidth = eWidth
       this.editorPaneInnerHeight = eHeight - 25
       let scaleW = 1
@@ -253,18 +265,15 @@ export default {
       let _scale = 1
       if (this.projectData.width > this.editorPaneInnerWidth) {
         scaleW = (this.editorPaneInnerWidth - this.translateNone * 2) / this.projectData.width
-        // console.log('scaleW:', scaleW)
       }
       if (this.projectData.height > this.editorPaneInnerHeight) {
         scaleH = (this.editorPaneInnerHeight - this.translateNone * 2) / this.projectData.height
-        // console.log('scaleH:', scaleH)
       }
       if (scaleW > scaleH) {
         _scale = scaleH
       } else {
         _scale = scaleW
       }
-      // console.log('_scale:', _scale)
       this.updateScale(parseInt(_scale * 100)) // 整数
       return _scale
     },
@@ -297,7 +306,6 @@ export default {
       const value = parseFloat((val * 0.01).toFixed(2)) // 小数
       this.projectData.canvasScale = value // 小数
       this.$store.dispatch('setPrjectData', this.projectData)
-      console.log(value)
       this.updateSize(value)
       this.$emit('update:scale', value)
     },

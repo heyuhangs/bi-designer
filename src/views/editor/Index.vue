@@ -140,7 +140,7 @@ export default {
     this.loading = true
     setTimeout(function() {
       self.loading = false
-    },1500)
+    }, 1000)
   },
   methods: {
     /**

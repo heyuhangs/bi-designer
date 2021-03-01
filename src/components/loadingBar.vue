@@ -31,13 +31,12 @@ export default {
 .loading-bg {
   idth: 100%;
   height: 100vh;
-  background-color: rgb(51,51,51,0.55);
+  background-color: rgb(51,51,51,0.66);
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  //opacity: .45;
 }
 .loading-con{
   position: fixed;
