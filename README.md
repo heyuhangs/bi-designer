@@ -1,8 +1,12 @@
-![Licence](https://img.shields.io/badge/licence-none-green.svg)
-# bi-designer
+<h1 align="center">BI Designer</h1>
 
-[comment]: <> (English | [简体中文]&#40;./README-zh.md&#41;)
+<div align="center">
 
-[comment]: <> (> A minimal vue admin template with Element UI & axios & iconfont & permission control & lint)
 
-**Live demo:** https://heyuhangs.github.io/bi-designer
+[![MIT](https://img.shields.io/github/license/iczer/vue-antd-admin)](https://github.com/iczer/vue-antd-admin/blob/master/LICENSE)
+
+
+</div>
+
+
+- 预览地址：https://heyuhangs.github.io/bi-designer
