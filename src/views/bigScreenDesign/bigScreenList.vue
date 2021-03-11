@@ -74,7 +74,6 @@ export default {
     addBigScreen() {
       const self = this
       this.loading = true
-      debugger
       this.$router.push({
         path: '/bigScreenEdit/edit'
       })
@@ -85,4 +84,8 @@ export default {
   }
 }
 </script>
-
+<style scoped>
+.add-screen{
+  cursor: pointer;
+}
+</style>

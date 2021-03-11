@@ -21,12 +21,6 @@ export const constantRoutes = [
     name: '大屏幕设计',
     icon: 'dashboard',
     children: [
-      // {
-      //   path: 'projectList',
-      //   component: () => import('@/views/bigScreenDesign/projectList'),
-      //   name: 'ProjectList',
-      //   meta: { title: '项目列表', noCache: true }
-      // },
       {
         path: 'bigScreenList',
         component: () => import('@/views/bigScreenDesign/bigScreenList'),

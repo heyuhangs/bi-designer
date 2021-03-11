@@ -49,9 +49,6 @@ export default {
       keyList = keyList.filter(v => {
         return editPropsComponentNameList.indexOf('AttrQk' + v)
       })
-      // debugger
-      // console.log('keyList', keyList)
-      // debugger
       return keyList
     }
   }

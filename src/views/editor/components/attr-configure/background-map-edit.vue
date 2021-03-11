@@ -33,7 +33,7 @@
           </el-col>
         </el-row>
       </div>
-      <propsAttr />
+      <propsAttr/>
     </div>
   </el-scrollbar>
 </template>
@@ -81,6 +81,10 @@ export default {
       'activePage',
       'pageMode'
     ])
+  },
+  mounted() {
+    // console.log('projectData', this.projectData.bgMapObj)
+    // debugger
   },
   methods: {
     switchChange(v) {
@@ -146,98 +150,98 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .components-attr-edit {
-    height: 100%;
+.components-attr-edit {
+  height: 100%;
 
-    .el-scrollbar__wrap {
-      overflow-x: hidden !important;
+  .el-scrollbar__wrap {
+    overflow-x: hidden !important;
+  }
+}
+
+.components-attr-animate-edit {
+  position: relative;
+}
+
+.attr-title {
+  font-weight: bold;
+}
+
+.attr-item-edit-wrapper {
+  padding-left: 18px;
+  display: flex;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 10px;
+
+  .attr-item-title {
+    text-align: left;
+    min-width: 60px;
+    line-height: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .attr-item-edit-input {
+    &.col-2 {
+      width: 90px;
+      margin-left: 10px;
+    }
+
+    &.col-1 {
+      width: 250px;
+    }
+
+    &.col-3 {
+      width: 60px;
+      margin-left: 10px;
+    }
+
+    &.col-4 {
+      width: 50px;
+      margin-left: 10px;
     }
   }
 
-  .components-attr-animate-edit {
-    position: relative;
-  }
-
-  .attr-title {
-    font-weight: bold;
-  }
-
-  .attr-item-edit-wrapper {
-    padding-left: 18px;
-    display: flex;
-    width: 100%;
+  .attr-item-edit-input-des {
     text-align: center;
-    padding-bottom: 10px;
-
-    .attr-item-title {
-      text-align: left;
-      min-width: 60px;
-      line-height: 28px;
-      height: 28px;
-      font-size: 12px;
-    }
-
-    .attr-item-edit-input {
-      &.col-2 {
-        width: 90px;
-        margin-left: 10px;
-      }
-
-      &.col-1 {
-        width: 250px;
-      }
-
-      &.col-3 {
-        width: 60px;
-        margin-left: 10px;
-      }
-
-      &.col-4 {
-        width: 50px;
-        margin-left: 10px;
-      }
-    }
-
-    .attr-item-edit-input-des {
-      text-align: center;
-      line-height: 12px;
-      margin-top: 5px;
-      font-size: 12px;
-      color: #606266;
-    }
+    line-height: 12px;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #606266;
   }
+}
 </style>
 
 <style lang="scss">
-  .components-attr-edit {
-    height: 100%;
+.components-attr-edit {
+  height: 100%;
 
-    .el-scrollbar__wrap {
-      overflow-x: hidden !important;
+  .el-scrollbar__wrap {
+    overflow-x: hidden !important;
+  }
+}
+
+.attr-item-edit-wrapper {
+  .el-switch__label {
+    color: #606266;
+  }
+
+  .el-switch__label.is-active {
+    color: #4072EE;
+  }
+
+  .el-switch {
+    margin: 3.6px 0;
+
+    .el-switch__core::after {
+      background-color: #4B4F55 !important;
     }
   }
 
-  .attr-item-edit-wrapper {
-    .el-switch__label {
-      color: #606266;
-    }
-
-    .el-switch__label.is-active {
-      color: #4072EE;
-    }
-
-    .el-switch {
-      margin: 3.6px 0;
-
-      .el-switch__core::after {
-        background-color: #4B4F55 !important;
-      }
-    }
-
-    .el-switch.is-checked {
-      .el-switch__core::after {
-        background-color: #FFFFFF !important;
-      }
+  .el-switch.is-checked {
+    .el-switch__core::after {
+      background-color: #FFFFFF !important;
     }
   }
+}
 </style>
