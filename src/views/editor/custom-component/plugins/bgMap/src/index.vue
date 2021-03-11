@@ -32,7 +32,7 @@
   </div>
 </template>
 <script>
-import { AMapManager, Loca } from 'vue-amap'
+import { AMapManager } from 'vue-amap'
 
 const amapManager = new AMapManager()
 export default {
@@ -69,8 +69,7 @@ export default {
       viewMode: '3D',
       position: [],
       // features: ['bg', 'road', 'building'],
-      // maplab.amap.com/share/mapv/
-      mapStyle: 'amap://styles/bed7ad93f5f2864d846d7efb88b74d7b'
+      mapStyle: 'amap://styles/6240238136c65473110e418d9c3b5d2d'
     }
   }
 }
