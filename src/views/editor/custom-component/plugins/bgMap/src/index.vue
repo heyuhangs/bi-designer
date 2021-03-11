@@ -69,7 +69,7 @@ export default {
       viewMode: '3D',
       position: [],
       // features: ['bg', 'road', 'building'],
-      mapStyle: 'amap://styles/6240238136c65473110e418d9c3b5d2d'
+      mapStyle: 'amap://styles/405132b34839bd92b05e55042c786d07'
     }
   }
 }
