@@ -1,7 +1,7 @@
 <!--test.vue-->
 <template>
   <div class="qk-image">
-    <img :src="imageSrc" alt="">
+    <img :src="imageSrc">
   </div>
 </template>
 
@@ -11,21 +11,23 @@ export default {
   props: {
     imageSrc: {
       type: String,
-      default: 'http://39.100.133.143:9801/static/img/visual/adorn/media/single-img.png'
+      default() {
+        return ''
+      }
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .qk-image {
-    width: 100%;
-    height: 100%;
-  }
+.qk-image {
+  width: 100%;
+  height: 100%;
+}
 
-  img {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 </style>

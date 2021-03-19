@@ -31,9 +31,7 @@ export default {
       type: Array,
       default: () => {
         return [
-          'http://39.100.133.143:9801/static/img/visual/adorn/media/single-img.png',
-          'http://39.100.133.143:9801/static/img/visual/adorn/media/single-img.png',
-          'http://39.100.133.143:9801/static/img/visual/adorn/media/single-img.png'
+          ''
         ]
       }
     },
