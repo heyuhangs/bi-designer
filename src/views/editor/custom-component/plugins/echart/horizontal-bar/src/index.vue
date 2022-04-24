@@ -17,7 +17,6 @@
 <script>
 import qs from 'qs'
 import ECharts from '../../components/ECharts'
-// import { getInxData, selectData } from '@/utils/lseUtils'
 // import echarts from 'echarts'
 import 'echarts/lib/chart/bar'
 

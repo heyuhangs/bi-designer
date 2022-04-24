@@ -124,8 +124,8 @@
         <p class="attr-item-title">数据类型：</p>
         <el-radio-group v-model="radio" size="mini" @change="radioChange">
           <el-radio-button :label="'1'">静态数据</el-radio-button>
-<!--          <el-radio-button :label="'2'">指标数据</el-radio-button>-->
-<!--          <el-radio-button :label="'3'">API数据</el-radio-button>-->
+          <!--          <el-radio-button :label="'2'">指标数据</el-radio-button>-->
+          <!--          <el-radio-button :label="'3'">API数据</el-radio-button>-->
         </el-radio-group>
       </div>
       <el-tooltip content="刷新数据" placement="top-end" effect="dark">
@@ -277,9 +277,6 @@
 <script>
 import JsonEditor from '@/components/JsonEditor'
 import { mapGetters } from 'vuex'
-// import { selectData, getInxData } from '@/utils/lseUtils'
-import { doError } from '@/utils/biz'
-import { default as Backendless } from 'backendless'
 
 export default {
   name: 'AttrQkEchartData',
@@ -335,9 +332,6 @@ export default {
     'activeElement.propsValue.comData': {
       handler(newVal, oldVal) {
         this.initData()
-        // this.data = this.activeElement.propsValue.comData || []
-        // console.log('activeElement', this.activeElement)
-        // this.initData()
       },
       deep: true
     },
@@ -348,8 +342,6 @@ export default {
     }
   },
   mounted() {
-    //
-    // console.log('mapTreeManu:', this.activeElement.propsValue.mapTreeManu)
     if (this.activeElement.propsValue.mapTreeManu) {
       this.isMenu = true
       this.tableData = this.activeElement.propsValue.mapTreeManu.treeData
@@ -357,7 +349,6 @@ export default {
       this.isMenu = false
     }
     console.log('isMenu:', this.isMenu)
-    // editor.setOption("readOnly", true);
     this.getList()
     this.initData()
   },
@@ -377,24 +368,7 @@ export default {
         this.getData()
       }
     },
-    async getList() {
-      const queryBuilder = Backendless.DataQueryBuilder.create()
-      queryBuilder.setPageSize(1000)
-      queryBuilder.setRelated(['indexInfo.link'])
-      const result = await Backendless.Data.of('indexGroup').find(queryBuilder)
-      if (result.code) {
-        doError(result)
-      }
-      this.inxList = result
-    },
     async getData() {
-      try {
-        const res = await selectData(this.apiObj)
-        this.apiData = res.datas || res.response
-      } catch (e) {
-        console.log('data-edit', e)
-        this.apiData = []
-      }
     },
     handlerEdit(row) {
       row.isEdit = !row.isEdit
@@ -409,7 +383,6 @@ export default {
       row.isEdit = false
     },
     handlerDelData(row, inx) {
-      // console.log(inx)
       this.tableData.splice(inx, 1)
     },
     handlerDataEdit(row) {
@@ -432,7 +405,6 @@ export default {
       }
     },
     async getInxData() {
-      this.inxData = await getInxData(this.inxDataApi, this.fieldArray)
     },
     radioChange() {
       this.data = this.activeElement.propsValue.comData || []
@@ -455,20 +427,7 @@ export default {
       this.indexInfoList = indexInfo
       this.inxDataApi.inxRow = obj[0]
     },
-    // initConfigData() {
-    //   this.activeElement.propsValue.apiObj = {
-    //     url: '',
-    //     reqType: 'get'
-    //   }
-    //   this.activeElement.propsValue.inxDataApi = {
-    //     inxRow: {},
-    //     inxName: '',
-    //     inxX: '',
-    //     inxY: ''
-    //   }
-    // },
     refeData() {
-      // this.initConfigData()
       this.activeElement.propsValue.dataType = this.radio
       if (this.radio === '1') {
         this.activeElement.propsValue.comData = { ...JSON.parse(this.data) }
@@ -487,7 +446,6 @@ export default {
       })
     },
     refeTreeMenuData() {
-      // this.initConfigData()
       this.treeMenuRow.dataType = this.radio
       if (this.radio === '1') {
         this.treeMenuRow.dataObj.comData = JSON.parse(this.data)

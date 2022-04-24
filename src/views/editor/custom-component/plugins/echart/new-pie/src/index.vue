@@ -13,7 +13,6 @@
 import qs from 'qs'
 import ECharts from '../../components/ECharts'
 import 'echarts/lib/chart/pie'
-// import { getInxData, selectData } from '@/utils/lseUtils'
 
 export default {
   name: 'DvEchartNewPie', // 这个名字很重要，它就是未来的标签名<qk-text></qk-text>

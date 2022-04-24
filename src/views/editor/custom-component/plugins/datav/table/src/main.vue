@@ -135,7 +135,6 @@
 </template>
 
 <script>
-// import { selectData } from '@/utils/lseUtils'
 import Unit from '../../../unit'
 
 const statusOption = [

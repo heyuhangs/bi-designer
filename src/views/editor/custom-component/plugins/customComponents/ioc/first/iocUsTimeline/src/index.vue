@@ -22,7 +22,6 @@
 
 <script>
 // import $axios from 'axios'
-// import { selectData } from '@/utils/lseUtils'
 
 export default {
   name: 'IocUsTimeline',

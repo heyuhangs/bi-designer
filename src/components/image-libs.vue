@@ -32,7 +32,6 @@
 
 <script>
 import $bus from '../views/editor/eventBus'
-import { default as Backendless } from 'backendless'
 
 export default {
   name: 'ImageLibs',
@@ -61,13 +60,6 @@ export default {
     // console.log('image', res)
   },
   methods: {
-    // async getData() {
-    //   const queryBuilder = Backendless.DataQueryBuilder.create()
-    //   queryBuilder.setPageSize(1000)
-    //   queryBuilder.setRelated(['schema'])
-    //   // queryBuilder.setWhereClause(`race.objectId='` + self.temp.objectId + `'`)
-    //   return await Backendless.Data.of('DateLink').find(queryBuilder)
-    // },
     beforeUpload(file) {
       if (file.size > 1 * 1024 * 1024) {
         this.$message.error('psd文件不能超过1M！')
@@ -83,31 +75,10 @@ export default {
       return false
     },
     uploadPsd(file) {
-      const self = this
+      // const self = this
       const params = new FormData()
       params.append('file', file)
       this.uploading = true
-      Backendless.Files.upload(file, 'upload/screenBackground/', true)
-        .then(function(fileURL) {
-          self.uploading = false
-          const com = []
-          com.push({ url: fileURL.fileURL })
-          // http://10.168.1.53:9000/3410D836-B862-06B7-FFC5-CCD0199FA700/92843498-A364-4989-91F7-D0F1E82DBE0A/files/upload/screenBackground/qietu.png
-          self.imageList = com || []
-          self.handleImageClick(fileURL.fileURL)
-          alert('图片上传成功!')
-        })
-        .catch(function(error) {
-          self.uploading = true
-          alert('图片上传失败!:' + error)
-        })
-      //
-      // this.$axios.post('/person/uploadImage', params).then(res => {
-      //   this.uploading = false
-      //   this.imageList.splice(0, 0, res.body)
-      // }).catch(() => {
-      //   this.uploading = true
-      // })
     },
     getMyImages() {
       this.hasLoadData = true
