@@ -9,7 +9,7 @@
               :body-style="{ padding: '0px' }"
             >
               <div class="image">
-                <i class="el-icon-plus"/>
+                <i class="el-icon-plus" />
               </div>
               <div class="bottom">
                 <span style="text-align: center;">添加</span>
@@ -22,9 +22,8 @@
               :body-style="{ padding: '0px' }"
             >
               <div class="screen-btns">
-                <!--                <el-button type="info" icon="el-icon-setting" circle />-->
-                <el-button type="primary" icon="el-icon-edit" circle @click="goNavTo(item)"/>
-                <el-button type="danger" icon="el-icon-delete" circle @click="handleDelete(item)"/>
+                <el-button type="primary" icon="el-icon-edit" circle @click="goNavTo(item)" />
+                <el-button type="danger" icon="el-icon-delete" circle @click="handleDelete(item)" />
               </div>
               <img :src="item.coverImage" class="image">
               <div class="bottom">
@@ -35,7 +34,7 @@
         </div>
       </div>
     </div>
-    <loading-bar v-show="loading"/>
+    <loading-bar v-show="loading" />
   </div>
 </template>
 
@@ -72,14 +71,13 @@ export default {
       })
     },
     addBigScreen() {
-      const self = this
       this.loading = true
+
       this.$router.push({
         path: '/bigScreenEdit/edit'
       })
-      setTimeout(() => {
-        self.loading = false
-      }, 1000)
+
+      this.loading = false
     }
   }
 }

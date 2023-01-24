@@ -8,9 +8,9 @@
         <div
           id="editor-main"
           class="editor-main"
+          :style="{transform: 'scale('+scale+')',left: translateX + 'px',top: translateY + 'px', width: projectData.width + 'px', height: projectData.height + 'px'}"
           @drop="handleDrop"
           @dragover="handleDragOver"
-          :style="{transform: 'scale('+scale+')',left: translateX + 'px',top: translateY + 'px', width: projectData.width + 'px', height: projectData.height + 'px'}"
         >
           <div
             id="canvas-panel"
@@ -55,7 +55,7 @@
               />
             </edit-shape>
           </div>
-          <div class="page-wrapper-mask"/>
+          <div class="page-wrapper-mask" />
         </div>
       </div>
     </el-main>
@@ -63,22 +63,22 @@
       <el-row>
         <el-col :span="8">
           <div class="">
-            <i class="el-icon-location-outline"/>坐标：<span>{{ eX }} , {{ eY }}</span>
+            <i class="el-icon-location-outline" />坐标：<span>{{ eX }} , {{ eY }}</span>
           </div>
         </el-col>
         <el-col :span="8">
           <div class="page-center">
-            <i class="el-icon-c-scale-to-original"/>尺寸：<span>{{ projectData.width }} , {{ projectData.height }}</span>
+            <i class="el-icon-c-scale-to-original" />尺寸：<span>{{ projectData.width }} , {{ projectData.height }}</span>
           </div>
         </el-col>
         <el-col :span="8">
           <div class="footer-designer-zoom">
             <label @click="editScale('reduce')">
-              <i class="el-icon-zoom-out"/>
+              <i class="el-icon-zoom-out" />
             </label>
-            <el-slider v-model="scaleValue" :min="20" :max="200" :step="5" @change="updateScale"/>
+            <el-slider v-model="scaleValue" :min="20" :max="200" :step="5" @change="updateScale" />
             <label @click="editScale('plus')">
-              <i class="el-icon-zoom-in"/>
+              <i class="el-icon-zoom-in" />
             </label>
           </div>
         </el-col>

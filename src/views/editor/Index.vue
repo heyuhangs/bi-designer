@@ -1,46 +1,38 @@
 <template>
   <div class="page-editor editor-wrapper">
     <div class="left-menu-main">
-      <ComponentsLibs/>
+      <ComponentsLibs />
     </div>
     <!--页面编辑区域-->
     <div class="editor-main">
-      <EditorPan ref="editorPan" :scale.sync="projectData.canvasScale"/>
+      <EditorPan ref="editorPan" :scale.sync="projectData.canvasScale" />
     </div>
     <!--属性编辑区域-->
     <div class="el-attr-edit-wrapper scrollbar-wrapper">
-      <el-tabs
-        v-if="!activeElementUUID"
-        :value="defaultActiveAttr"
-        stretch
-      >
+      <el-tabs v-if="!activeElementUUID" :value="defaultActiveAttr" stretch>
         <el-tab-pane label="大屏设置" name="大屏设置">
-          <pageAttrEdit ref="pageAttrEditRef" @screenshots="screenshots"/>
+          <pageAttrEdit ref="pageAttrEditRef" @screenshots="screenshots" />
         </el-tab-pane>
         <el-tab-pane label="背景地图" name="背景地图">
-          <backgroundMapEdit/>
+          <backgroundMapEdit />
         </el-tab-pane>
       </el-tabs>
       <el-tabs v-else v-model="activeAttr" stretch>
         <el-tab-pane
-          v-for="(item,index) in activeElement.attributeTab"
+          v-for="(item, index) in activeElement.attributeTab"
           :key="index"
           :label="item.name"
           :name="item.elName"
         >
-          <component
-            :is="item.elName"
-            v-if="activeAttr == item.elName"
-          />
+          <component :is="item.elName" v-if="activeAttr == item.elName" />
         </el-tab-pane>
       </el-tabs>
     </div>
-    <loading-bar v-show="loading"/>
+    <loading-bar v-show="loading" />
   </div>
 </template>
 
 <script>
-
 // 属性编辑相关组件
 import loadingBar from '@/components/loadingBar'
 import EditorPan from './components/EditorPan'
@@ -117,17 +109,14 @@ export default {
       activePageUUID: state => state.editor.activePageUUID,
       activeElementUUID: state => state.editor.activeElementUUID
     }),
-    ...mapGetters([
-      'pageMode',
-      'activeElement'
-    ])
+    ...mapGetters(['pageMode', 'activeElement'])
   },
 
   watch: {
     activeElement(val) {
-      // debugger
-      this.activeAttr = this.activeElement ? this.activeElement.attributeTab[0].elName || '' : ''
-      console.log('activeElement-index')
+      this.activeAttr = this.activeElement
+        ? this.activeElement.attributeTab[0].elName || ''
+        : ''
     }
   },
   async created() {
@@ -169,7 +158,7 @@ export default {
 
 <style lang="scss" scoped>
 .page-editor {
-  background: #16191C;
+  background: #16191c;
 }
 
 .editor-wrapper {
@@ -189,8 +178,28 @@ export default {
     background: #171b22 !important;
     position: relative;
 
+    /* 设置滚动条的样式 */
+    ::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
+    }
+
+    /* 滚动槽 */
+    ::-webkit-scrollbar-track {
+      background-color: #333;
+      border-radius: 18px;
+    }
+    /* 滚动条滑块 */
+    ::-webkit-scrollbar-thumb {
+      border-radius: 50px;
+      background-color: #1F2327;
+    }
+    ::-webkit-scrollbar-thumb:window-inactive {
+      border-radius: 50px;
+    }
+
     .el-footer {
-      background-color: #292E33 !important;
+      background-color: #292e33 !important;
     }
   }
 
@@ -215,18 +224,17 @@ export default {
 }
 </style>
 <style lang="scss">
-
 .editor-side-bar {
   .el-tabs__item.is-active {
-    color: #4072EE !important;
+    color: #4072ee !important;
   }
 
   .el-tabs__item {
-    color: #90939A;
+    color: #90939a;
   }
 
   .el-tabs__nav-wrap::after {
-    background-color: #1F2327 !important;
+    background-color: #1f2327 !important;
   }
 }
 
@@ -236,43 +244,46 @@ export default {
 
 .el-attr-edit-wrapper {
   .el-tabs__active-bar {
-    background-color: #4072EE !important;
+    background-color: #4072ee !important;
   }
 
   .el-tabs__nav-wrap::after {
-    background-color: #1F2327 !important;
+    background-color: #1f2327 !important;
   }
 
-  .el-input__inner, .el-input-number, .el-textarea__inner, .el-input-number__decrease, .el-input-number__increase, .el-color-picker__trigger, .el-slider__runwa, .el-color-picker__panel, .el-color-dropdown__btns {
-    background: #1F2327 !important;
-    border-color: #292E33 !important;
+  .el-input__inner,
+  .el-input-number,
+  .el-textarea__inner,
+  .el-input-number__decrease,
+  .el-input-number__increase,
+  .el-color-picker__trigger,
+  .el-slider__runwa,
+  .el-color-picker__panel,
+  .el-color-dropdown__btns {
+    background: #1f2327 !important;
+    border-color: #292e33 !important;
     color: #c0c4cc !important;
   }
 
   .el-tabs {
     height: 100%;
     padding-bottom: 10px;
-    /*border: none;*/
     .el-tabs__header {
       margin: 0;
-      background: #1F2327 !important;
+      background: #1f2327 !important;
     }
 
     .el-tabs__item {
       padding: 0 !important;
-      color: #90939A;
+      color: #90939a;
     }
 
     .el-tabs__item.is-active {
-      color: #4072EE !important;
+      color: #4072ee !important;
     }
   }
 
   .el-tabs__content {
-    /*max-height: calc(100% - 55px);*/
-    /*overflow: auto !important;*/
-    /*padding: 0 10px;*/
-
     & > div {
       height: 100%;
     }
@@ -289,7 +300,7 @@ export default {
   width: 338px;
 
   .el-tabs__active-bar {
-    background-color: #4072EE !important;
+    background-color: #4072ee !important;
   }
 }
 
@@ -309,9 +320,9 @@ export default {
     .el-tabs__item {
       padding: 0;
       width: 50%;
-      background: #1F2327;
-      border-bottom: 1px solid #292E33 !important;
-      color: #C0C4CC;
+      background: #1f2327;
+      border-bottom: 1px solid #292e33 !important;
+      color: #c0c4cc;
 
       span {
         display: inline-block;
@@ -321,9 +332,8 @@ export default {
     }
 
     .el-tabs__item.is-active {
-      color: #4072EE;
+      color: #4072ee;
     }
   }
 }
 </style>
-

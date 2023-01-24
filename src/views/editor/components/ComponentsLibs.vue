@@ -2,11 +2,11 @@
   <el-tabs>
     <el-tab-pane>
       <span slot="label">组件</span>
-      <component-menu/>
+      <component-menu />
     </el-tab-pane>
     <el-tab-pane label="消息中心">
       <span slot="label">图层</span>
-      <layer-components/>
+      <layer-components />
     </el-tab-pane>
   </el-tabs>
 </template>
