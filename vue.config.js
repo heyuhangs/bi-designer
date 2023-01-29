@@ -37,6 +37,9 @@ module.exports = {
       alias: {
         '@': resolve('src')
       }
+    },
+    optimization: {
+      usedExports: true
     }
   },
   chainWebpack(config) {
@@ -45,6 +48,13 @@ module.exports = {
       fileBlacklist: [/\.map$/, /hot-update\.js$/, /runtime\..*\.js$/],
       include: 'initial'
     }])
+
+    if (process.env.VUE_APP_ANALYZE) {
+      config
+        .plugin('webpack-bundle-analyzer')
+        .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+    }
+
     config.plugins.delete('prefetch')
 
     // set svg-sprite-loader

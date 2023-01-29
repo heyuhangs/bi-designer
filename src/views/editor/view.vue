@@ -31,11 +31,12 @@ export default {
       id: this.$route.query.point_id,
       objectId: this.$route.query.objectId
     })
+
     if (eventId) {
       Unit.$data.secondList = event
     }
+
     this.projectData = JSON.parse(localStorage.getItem('projectData'))
-    console.log()
     this.ele = this.projectData.pages[0].elements
     if (this.projectData.pisProportionalScaling) {
       this.trans()
