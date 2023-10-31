@@ -9,4 +9,4 @@
 </div>
 
 
-- 预览地址：https://heyuhangs.github.io/bi-designer
+- Preview：https://heyuhangs.github.io/bi-designer
